@@ -3,7 +3,7 @@ A simple sailsjs pagination service
 
 ## Installation
 
-  `npm install @littlefk/sails-pagination`
+  `npm install sails-pagination`
 
 ## Usage
 
