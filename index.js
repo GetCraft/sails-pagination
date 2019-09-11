@@ -7,7 +7,6 @@ function build(query) {
   const params = {
     skip: 0,
     limit: 100,
-    sort: 'name ASC'
   }
 
   if (query) {
@@ -18,9 +17,10 @@ function build(query) {
       limit: query.limit
         ? query.limit
         : params.limit,
-      sort: query.sort
-        ? query.sort
-        : params.sort
+    }
+
+    if (query.sort) {
+      newParam.sort = query.sort
     }
 
     if (query.where) {
@@ -40,15 +40,20 @@ function paginate(count, params, rows){
   const totalPages = isNaN(Math.ceil(count/params.limit))
     ? 1
     : Math.ceil(count/params.limit)
+
+  const qs = {
+    skip: parseInt(params.skip),
+    limit: parseInt(params.limit)
+  }
+  if (params.sort) {
+    qs.sort = params.sort
+  }
+
   return {
     count: count,
     totalPages: totalPages,
     currentPage: currentPage,
-    qs: {
-      skip: parseInt(params.skip),
-      limit: parseInt(params.limit),
-      sort: params.sort,
-    },
+    qs: qs,
     rows: rows,
   }
 }
