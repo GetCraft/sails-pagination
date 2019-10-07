@@ -20,7 +20,7 @@ function build(query) {
     }
 
     if (query.sort) {
-      newParam.sort = query.sort
+      newParams.sort = query.sort
     }
 
     if (query.where) {
