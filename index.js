@@ -3,13 +3,29 @@ const PaginationService = {
   paginate: paginate,
 }
 
-function build(query) {
+function build(query0, allowedSorts) {
   const params = {
     skip: 0,
     limit: 100,
   }
 
-  if (query) {
+  if (query0) {
+    let query = {}
+    const criterias = ['limit', 'skip', 'sort']
+    criterias.forEach(c => {
+      if (query0.where && (query0.where[c]) || query0.where[c] === 0) {
+        query[c] = query0.where[c]
+        delete query0.where[c]
+      }
+    })
+    if (query.sort && allowedSorts && Array.isArray(allowedSorts) &&
+        allowedSorts
+        .map(s => query.sort.startsWith(s))
+        .filter(r => r === false).length > 0) {
+      delete query.sort
+    }
+    query = Object.assign(query, query0)
+
     let newParams = {
       skip: query.skip
         ? query.skip
