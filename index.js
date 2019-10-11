@@ -36,7 +36,11 @@ function build(query0, allowedSorts) {
     }
 
     if (query.sort) {
-      newParams.sort = query.sort
+      if (typeof query.sort === 'object') {
+        newParams.sort = [query.sort]
+      } else {
+        newParams.sort = query.sort
+      }
     }
 
     if (query.where) {
