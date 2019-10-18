@@ -9,7 +9,7 @@ function build(query0, allowedSorts) {
     limit: 100,
   }
 
-  if (query0) {
+  if (query0 && Object.keys(query0).length > 0) {
     let query = {}
     const criterias = ['limit', 'skip', 'sort']
     criterias.forEach(c => {
