@@ -18,13 +18,14 @@ function build(query0, allowedSorts) {
         delete query0.where[c]
       }
     })
+    query = Object.assign(query, query0)
+
     if (query.sort && allowedSorts && Array.isArray(allowedSorts) &&
         allowedSorts
         .map(s => query.sort.startsWith(s))
         .filter(r => r === false).length > 0) {
       delete query.sort
     }
-    query = Object.assign(query, query0)
 
     let newParams = {
       skip: query.skip
