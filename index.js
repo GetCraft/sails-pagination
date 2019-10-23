@@ -13,7 +13,7 @@ function build(query0, allowedSorts) {
     let query = {}
     const criterias = ['limit', 'skip', 'sort']
     criterias.forEach(c => {
-      if (query0.where && (query0.where[c]) || query0.where[c] === 0) {
+      if (query0.where && (query0.where[c] || query0.where[c] === 0)) {
         query[c] = query0.where[c]
         delete query0.where[c]
       }
