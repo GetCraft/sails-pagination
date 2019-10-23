@@ -38,7 +38,7 @@ function build(query0, allowedSorts) {
 
     if (query.sort) {
       if (typeof query.sort === 'object') {
-        newParams.sort = [query.sort]
+        newParams.sort = Object.keys(query.sort).map(s => ({ [s]: query.sort[s] }))
       } else {
         newParams.sort = query.sort
       }
